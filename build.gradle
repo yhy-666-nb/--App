@@ -1,4 +1,4 @@
-插件{
-身份证明(识别)' com.android.application '版本'8.2.0'应用错误的
-身份证明(识别)' org.jetbrains.kotlin.android '版本'1.9.20'应用错误的
+plugins {
+    id 'com.android.application' version '8.2.0' apply false
+    id 'org.jetbrains.kotlin.android' version '1.9.20' apply false
 }
