@@ -1,4 +1,4 @@
 #!/bin/bash
-DIR = $(CD " $(dirname " $ 0 ")"；pwd)
-JAVA_OPTS="-Xmx2048m "
-exec " $ DIR/gradle/wrapper/gradle " " $ @ "
+cd "$(dirname "$0")"
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+./gradlew assembleDebug
