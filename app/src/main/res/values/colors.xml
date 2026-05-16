@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="jelly_pink_light">#FFF0D4E8</color>
+    <color name="jelly_pink">#FFFFB6D9</color>
+    <color name="jelly_pink_deep">#FFFF8EC4</color>
+    <color name="jelly_blue_light">#FFD5E5F5</color>
+    <color name="jelly_blue">#FFB8D4F0</color>
+    <color name="jelly_blue_deep">#FF8BB8E0</color>
+    <color name="jelly_purple_light">#FFE8D5F5</color>
+    <color name="jelly_purple">#FFD4B8F0</color>
+    <color name="jelly_purple_deep">#FFB890E0</color>
+    <color name="jelly_button_normal">#CCFFB6D9</color>
+    <color name="jelly_button_pressed">#E6FF8EC4</color>
+    <color name="jelly_button_selected">#E6B8D4F0</color>
+    <color name="jelly_text_primary">#FF4A3A5C</color>
+    <color name="jelly_text_secondary">#FF7A6A8C</color>
+    <color name="jelly_text_accent">#FFD4609E</color>
+    <color name="jelly_switch_on">#FFD4609E</color>
+    <color name="jelly_switch_off">#FFC8B8D8</color>
+    <color name="jelly_nav_bg">#30FFFFFF</color>
+    <color name="jelly_nav_selected">#CCE8D5F5</color>
+</resources>
