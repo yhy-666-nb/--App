@@ -3,6 +3,7 @@ package com.example.keyfloat
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.PixelFormat
 import android.graphics.PorterDuff
