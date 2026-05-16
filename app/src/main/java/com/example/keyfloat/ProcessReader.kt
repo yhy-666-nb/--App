@@ -1,8 +1,9 @@
 package com.example.keyfloat
 
-import android.app.ActivityManager
 import android.app.usage.UsageStatsManager
 import android.content.Context
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import android.os.Build
 
 object ProcessReader {
@@ -12,74 +13,52 @@ object ProcessReader {
         private set
 
     /**
-     * 获取当前前台应用的包名
+     * 获取最近使用的第三方应用列表（排除系统应用和自身）
      */
-    fun getForegroundPackage(context: Context): String? {
-        // Android 5.0+ 使用 UsageStatsManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val usageStatsManager = context.getSystemService(Context.USAGE_STATS_SERVICE) as? UsageStatsManager
-            val now = System.currentTimeMillis()
-            val stats = usageStatsManager?.queryUsageStats(
-                UsageStatsManager.INTERVAL_BEST,
-                now - 1000 * 60, // 最近1分钟
-                now
-            )
-            // 找出最后使用时间的应用
-            val recent = stats?.maxByOrNull { it.lastTimeUsed }
-            if (recent != null && recent.packageName != context.packageName) {
-                return recent.packageName
+    fun getRecentApps(context: Context): List<AppInfo> {
+        val usageStatsManager = context.getSystemService(Context.USAGE_STATS_SERVICE) as? UsageStatsManager
+        val currentTime = System.currentTimeMillis()
+        val stats = usageStatsManager?.queryUsageStats(
+            UsageStatsManager.INTERVAL_BEST,
+            currentTime - 1000 * 60 * 60 * 24, // 最近24小时
+            currentTime
+        ) ?: return emptyList()
+
+        val pm = context.packageManager
+        val myPackage = context.packageName
+
+        return stats
+            .filter { it.packageName != myPackage }
+            .sortedByDescending { it.lastTimeUsed }
+            .mapNotNull { stat ->
+                try {
+                    val appInfo = pm.getApplicationInfo(stat.packageName, 0)
+                    // 只显示用户安装的应用（非系统应用）
+                    if ((appInfo.flags and ApplicationInfo.FLAG_SYSTEM) == 0) {
+                        AppInfo(
+                            packageName = stat.packageName,
+                            appName = pm.getApplicationLabel(appInfo).toString(),
+                            icon = pm.getApplicationIcon(stat.packageName)
+                        )
+                    } else null
+                } catch (e: PackageManager.NameNotFoundException) {
+                    null
+                }
             }
-        }
-        // 备用：ActivityManager（可能受限）
-        try {
-            val am = context.getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager
-            val tasks = am?.getRunningTasks(1)
-            if (tasks?.isNotEmpty() == true) {
-                return tasks[0].topActivity?.packageName
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return null
+            .distinctBy { it.packageName }
+            .take(20) // 最多显示20个
     }
 
     fun checkProcess(context: Context): Boolean {
         if (targetPackageName.isEmpty()) return false
-
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                val usageStatsManager = context.getSystemService(Context.USAGE_STATS_SERVICE) as? UsageStatsManager
-                val currentTime = System.currentTimeMillis()
-                val stats = usageStatsManager?.queryUsageStats(
-                    UsageStatsManager.INTERVAL_DAILY,
-                    currentTime - 1000 * 60 * 60 * 24,
-                    currentTime
-                )
-                val targetStats = stats?.find { it.packageName == targetPackageName }
-                if (targetStats != null && targetStats.lastTimeUsed > System.currentTimeMillis() - 5000) {
-                    isProcessActive = true
-                    return true
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        try {
-            val am = context.getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager
-            val runningTasks = am?.getRunningTasks(1)
-            if (runningTasks?.isNotEmpty() == true) {
-                val topPackage = runningTasks[0].topActivity?.packageName
-                if (topPackage == targetPackageName) {
-                    isProcessActive = true
-                    return true
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        isProcessActive = false
-        return false
+        // 简化检测：只要目标应用在最近使用列表中即可
+        val recent = getRecentApps(context)
+        return recent.any { it.packageName == targetPackageName }
     }
+
+    data class AppInfo(
+        val packageName: String,
+        val appName: String,
+        val icon: android.graphics.drawable.Drawable
+    )
 }
