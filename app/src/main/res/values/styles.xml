@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.KeyFloat" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/jelly_pink</item>
+        <item name="colorPrimaryVariant">@color/jelly_pink_deep</item>
+        <item name="colorOnPrimary">#FFFFFFFF</item>
+        <item name="colorSecondary">@color/jelly_blue</item>
+        <item name="colorSecondaryVariant">@color/jelly_blue_deep</item>
+        <item name="colorOnSecondary">#FFFFFFFF</item>
+        <item name="android:statusBarColor">@color/jelly_purple_light</item>
+    </style>
+</resources>
