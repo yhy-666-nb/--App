@@ -1,0 +1,57 @@
+plugins {
+身份证明（identification）' com.android.application '
+' org.jetbrains.kotlin.android '' org.jetbrains.kotlin.android '
+}
+
+android {
+命名空间' com.example.keyfloat '
+编译dk34
+
+defaultConfig {
+应用程序Id" com.example.keyfloat "
+明斯克24
+targetSdk34
+版本代码1
+版本名称"1.0"
+ndk {
+无机过滤器armeabi-v7a，arm64-v8a '
+        }
+    }
+
+构建类型{
+发布{
+minifyEnabled错误的
+        }
+    }
+    
+编译{
+源代码兼容Java 语言(一种计算机语言，尤用于创建网站)版。版本_17
+targetCompatibility JavaVersion。版本_17
+    }
+    
+kotlinOptions {
+jvmTarget ='17'
+    }
+    
+构建功能{
+viewBinding =真实的
+    }
+    
+externalNativeBuild {
+cmake {
+路径文件(' CMakeLists.txt ')
+版本'3.22.1'
+        }
+    }
+}
+
+属国{
+履行' androidx.core:core-ktx:1.12.0 '
+履行安卓十.应用 兼容:应用兼容:1。6 .1 '
+履行com。谷歌。安卓。材质:材料:1。11 .0 '
+履行安卓十、约束布局:约束布局:2。1 .4 '
+履行组织机构.喷气大脑100 . 科特林克斯:kot linx-协同程序安卓系统:1。7 .3 '
+履行com .干杯。翻新2:改装:2.9.0 '
+履行com .干杯。翻新2:转换器-gson:2.9.0 '
+履行com。摆好架势好的超文本传送协议（Hyper Text Transport Protocol的缩写）。3:好的http:4。12 .0 '
+}
