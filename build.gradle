@@ -1,17 +1,4 @@
-buildscript {
-存储库{
-谷歌()
-mavenCentral()
-    }
-依赖关系{
-类路径com。安卓。工具。构造:gradle:8。2 .0 '
-类路径org。喷气大脑。kot Lin:kot Lin-grad le插件:1。9 .20 '
-    }
-}
-
-所有项目{
-存储库{
-谷歌()
-mavenCentral()
-    }
+插件{
+身份证明(识别)' com.android.application '版本'8.2.0'应用错误的
+身份证明(识别)' org.jetbrains.kotlin.android '版本'1.9.20'应用错误的
 }
