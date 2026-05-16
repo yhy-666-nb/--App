@@ -156,7 +156,12 @@ class FloatWindowService : Service() {
             }
         }
     }
-
+private fun requestUsageStatsPermission() {
+    val intent = Intent(android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS)
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    startActivity(intent)
+}
+    
     private fun hasUsageStatsPermission(): Boolean {
     val appOps = getSystemService(Context.APP_OPS_SERVICE) as? android.app.AppOpsManager
     if (appOps != null) {
