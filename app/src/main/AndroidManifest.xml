@@ -1,0 +1,45 @@
+<?xml版本="1.0 "编码="utf-8 "？>
+< manifest xmlns:Android = " http://schemas . Android . com/apk/RES/Android "
+xmlns:工具=" http://schemas .安卓. com/tools " >
+
+    <使用权限android:名称=" Android . permission . system _ ALERT _ WINDOW " />
+    <使用权限android:名称=" Android . permission . foreground _ SERVICE " />
+    <使用权限安卓系统:名称= "安卓。许可。foreground _ SERVICE _ SPECIAL _ USE "/>
+    <使用权限安卓系统:名称= "安卓。许可。package _ USAGE _ STATS
+        工具:忽略=“受保护的许可” />
+    <使用权限安卓系统:名称= "安卓。许可。管理外部存储"
+        工具:忽略="范围存储" />
+    <使用权限安卓系统:名称= "安卓。许可。read _ EXTERNAL _ STORAGE " />
+    <使用权限安卓系统:名称= "安卓。许可。write _ EXTERNAL _ STORAGE " />
+    <使用权限安卓系统:名称= " Android . permission . internet "/>
+
+    <应用
+        android:allowBackup=“真实”android:allowBackup=“真实”
+        安卓:图标=" @mipmap/ic_launcher "
+        安卓:标签="密钥浮窗"
+安卓系统:支持sRtl= "真实"
+安卓：主题="@style/Theme。按键浮动"
+安卓系统:使用清理文本流量="真实">
+
+        <活动
+            安卓系统:名称=".主要活动"安卓系统:名称=".主要活动"
+            安卓系统:已导出="真实" >安卓系统:已导出="真实">
+            <意图过滤器>
+                <行为安卓系统：名称=" android.intent.action.MAIN " /><行为安卓系统：名称=" android.intent.action.MAIN " />
+                <种类安卓系统:名称= "安卓。意图。类别。启动器"/><种类安卓系统:名称= "安卓。意图。类别。启动器"/>
+            </意图过滤器>
+        </活动>
+
+        <服务
+            安卓系统:名称=".浮动窗口服务"安卓系统:名称=".浮动窗口服务"
+            安卓系统:已启用="真实“安卓系统:已启用="真实"
+安卓系统:已导出="假"
+安卓系统:前景服务类型="特殊用途" />
+
+        <服务
+            安卓系统:名称=".GameOverlayService "安卓系统:名称=".GameOverlayService "
+            安卓系统:已启用="真实“安卓系统:已启用="真实"
+            android:已导出=“假”
+            android:前景服务类型=“特殊用途” />
+    </应用>
+</显示>
