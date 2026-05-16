@@ -1,4 +1,3 @@
 #!/bin/bash
-cd "$(dirname "$0")"
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-./gradlew assembleDebug
+cd "$(目录名" $0 ")"
+。/gradle/wrapper/gradle组装的无bug守护进程
