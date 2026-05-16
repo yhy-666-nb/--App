@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:gravity="center_horizontal">
+
+        <!-- 进程读取 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/btn_assist_read_process"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="读取游戏进程"
+                android:textSize="12sp"
+                android:background="@drawable/jelly_button_bg"
+                android:textColor="@color/jelly_text_primary" />
+
+            <TextView
+                android:id="@+id/tv_assist_process_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="未读取"
+                android:textSize="11sp"
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_assist_locked_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="⚠️ 请先读取游戏进程"
+            android:textSize="12sp"
+            android:textColor="@android:color/holo_orange_dark"
+            android:gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <!-- 功能开关区 -->
+        <LinearLayout
+            android:id="@+id/layout_top_switches"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:alpha="0.5">
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="6dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="🎯 辅助自瞄" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/jelly_text_primary"/>
+                <com.google.android.material.switchmaterial.SwitchMaterial android:id="@+id/switch_aim_assist" android:layout_width="wrap_content" android:layout_height="wrap_content" android:enabled="false"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="6dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="🔥 自动开火" android:textSize="13sp" android:textColor="@color/jelly_text_primary"/>
+                <com.google.android.material.switchmaterial.SwitchMaterial android:id="@+id/switch_auto_fire" android:layout_width="wrap_content" android:layout_height="wrap_content" android:enabled="false"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="6dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="⬇️ 取消枪械后坐力" android:textSize="13sp" android:textColor="@color/jelly_text_primary"/>
+                <com.google.android.material.switchmaterial.SwitchMaterial android:id="@+id/switch_no_recoil" android:layout_width="wrap_content" android:layout_height="wrap_content" android:enabled="false"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="6dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="⚡ 取消切换枪械后摇" android:textSize="13sp" android:textColor="@color/jelly_text_primary"/>
+                <com.google.android.material.switchmaterial.SwitchMaterial android:id="@+id/switch_no_switch_delay" android:layout_width="wrap_content" android:layout_height="wrap_content" android:enabled="false"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="6dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="🔄 一键换弹" android:textSize="13sp" android:textColor="@color/jelly_text_primary"/>
+                <com.google.android.material.switchmaterial.SwitchMaterial android:id="@+id/switch_quick_reload" android:layout_width="wrap_content" android:layout_height="wrap_content" android:enabled="false"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="6dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="🔫 自动切枪" android:textSize="13sp" android:textColor="@color/jelly_text_primary"/>
+                <com.google.android.material.switchmaterial.SwitchMaterial android:id="@+id/switch_auto_switch_weapon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:enabled="false"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="6dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="🚀 自动喷气背包" android:textSize="13sp" android:textColor="@color/jelly_text_primary"/>
+                <com.google.android.material.switchmaterial.SwitchMaterial android:id="@+id/switch_jetpack" android:layout_width="wrap_content" android:layout_height="wrap_content" android:enabled="false"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="6dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="👁️ 取消视角限制" android:textSize="13sp" android:textColor="@color/jelly_text_primary"/>
+                <com.google.android.material.switchmaterial.SwitchMaterial android:id="@+id/switch_free_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:enabled="false"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#22000000" android:layout_marginVertical="8dp"/>
+
+        <!-- 自瞄设置 -->
+        <LinearLayout android:id="@+id/layout_aim_settings" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:visibility="gone">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="━━━ 自瞄设置 ━━━" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/jelly_text_accent" android:layout_gravity="center" android:layout_marginBottom="8dp"/>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📍 确定游戏准心坐标" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/jelly_text_primary" android:layout_marginBottom="6dp"/>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="4dp">
+                <TextView android:layout_width="40dp" android:layout_height="wrap_content" android:text="X轴：" android:textSize="11sp" android:textColor="@color/jelly_text_secondary"/>
+                <SeekBar android:id="@+id/seekbar_crosshair_x" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:max="2000" android:progress="1000"/>
+                <EditText android:id="@+id/et_crosshair_x" android:layout_width="60dp" android:layout_height="wrap_content" android:inputType="numberDecimal" android:text="1080" android:textSize="11sp" android:padding="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="4dp">
+                <TextView android:layout_width="40dp" android:layout_height="wrap_content" android:text="Y轴：" android:textSize="11sp" android:textColor="@color/jelly_text_secondary"/>
+                <SeekBar android:id="@+id/seekbar_crosshair_y" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:max="4000" android:progress="2000"/>
+                <EditText android:id="@+id/et_crosshair_y" android:layout_width="60dp" android:layout_height="wrap_content" android:inputType="numberDecimal" android:text="2160" android:textSize="11sp" android:padding="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="8dp">
+                <TextView android:layout_width="40dp" android:layout_height="wrap_content" android:text="Z轴：" android:textSize="11sp" android:textColor="@color/jelly_text_secondary"/>
+                <SeekBar android:id="@+id/seekbar_crosshair_z" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:max="500" android:progress="0"/>
+                <EditText android:id="@+id/et_crosshair_z" android:layout_width="60dp" android:layout_height="wrap_content" android:inputType="numberDecimal" android:text="0" android:textSize="11sp" android:padding="4dp"/>
+            </LinearLayout>
+
+            <View android:id="@+id/divider_aim_prediction" android:layout_width="match_parent" android:layout_height="1dp" android:background="#22000000" android:layout_marginBottom="8dp"/>
+
+            <!-- 预判辅助自瞄 -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="━━━ 预判辅助自瞄 ━━━" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/jelly_text_accent" android:layout_gravity="center" android:layout_marginBottom="8dp"/>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="8dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="🔮 开启预判" android:textSize="12sp" android:textColor="@color/jelly_text_primary"/>
+                <com.google.android.material.switchmaterial.SwitchMaterial android:id="@+id/switch_prediction_enabled" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                <Button android:id="@+id/btn_add_prediction" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="+添加" android:textSize="10sp" android:minWidth="0dp" android:paddingHorizontal="8dp" android:layout_marginStart="4dp" android:background="@drawable/jelly_button_bg" android:textColor="@color/jelly_text_primary"/>
+                <Button android:id="@+id/btn_remove_prediction" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-减少" android:textSize="10sp" android:minWidth="0dp" android:paddingHorizontal="6dp" android:layout_marginStart="2dp" android:background="@drawable/jelly_button_bg" android:textColor="@color/jelly_text_primary"/>
+            </LinearLayout>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📏 触发距离范围" android:textSize="11sp" android:textColor="@color/jelly_text_secondary" android:layout_marginBottom="4dp"/>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="4dp">
+                <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="最小距离：" android:textSize="11sp" android:textColor="@color/jelly_text_secondary"/>
+                <SeekBar android:id="@+id/seekbar_distance_min" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:max="2500" android:progress="0"/>
+                <EditText android:id="@+id/et_distance_min" android:layout_width="60dp" android:layout_height="wrap_content" android:inputType="number" android:text="0" android:textSize="11sp" android:padding="4dp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="米" android:textSize="11sp" android:textColor="@color/jelly_text_secondary"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="8dp">
+                <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="最大距离：" android:textSize="11sp" android:textColor="@color/jelly_text_secondary"/>
+                <SeekBar android:id="@+id/seekbar_distance_max" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:max="2500" android:progress="2500"/>
+                <EditText android:id="@+id/et_distance_max" android:layout_width="60dp" android:layout_height="wrap_content" android:inputType="number" android:text="2500" android:textSize="11sp" android:padding="4dp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="米" android:textSize="11sp" android:textColor="@color/jelly_text_secondary"/>
+            </LinearLayout>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🎯 准心在敌方建模上的瞄准坐标" android:textSize="11sp" android:textColor="@color/jelly_text_secondary" android:layout_marginBottom="4dp"/>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="4dp">
+                <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="瞄准X轴：" android:textSize="11sp" android:textColor="@color/jelly_text_secondary"/>
+                <SeekBar android:id="@+id/seekbar_prediction_x" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:max="2000" android:progress="1000"/>
+                <EditText android:id="@+id/et_prediction_x" android:layout_width="60dp" android:layout_height="wrap_content" android:inputType="numberDecimal" android:text="1080" android:textSize="11sp" android:padding="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="4dp">
+                <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="瞄准Y轴：" android:textSize="11sp" android:textColor="@color/jelly_text_secondary"/>
+                <SeekBar android:id="@+id/seekbar_prediction_y" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:max="4000" android:progress="2000"/>
+                <EditText android:id="@+id/et_prediction_y" android:layout_width="60dp" android:layout_height="wrap_content" android:inputType="numberDecimal" android:text="2160" android:textSize="11sp" android:padding="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:layout_marginBottom="8dp">
+                <Button android:id="@+id/btn_aim_head" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="头部" android:textSize="10sp" android:minWidth="0dp" android:paddingHorizontal="6dp" android:background="@drawable/jelly_button_bg" android:textColor="@color/jelly_text_primary"/>
+                <Button android:id="@+id/btn_aim_chest" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="胸部" android:textSize="10sp" android:minWidth="0dp" android:paddingHorizontal="6dp" android:layout_marginStart="4dp" android:background="@drawable/jelly_button_bg" android:textColor="@color/jelly_text_primary"/>
+                <Button android:id="@+id/btn_aim_pelvis" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="骨盆" android:textSize="10sp" android:minWidth="0dp" android:paddingHorizontal="6dp" android:layout_marginStart="4dp" android:background="@drawable/jelly_button_bg" android:textColor="@color/jelly_text_primary"/>
+                <Button android:id="@+id/btn_aim_leg" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="腿部" android:textSize="10sp" android:minWidth="0dp" android:paddingHorizontal="6dp" android:layout_marginStart="4dp" android:background="@drawable/jelly_button_bg" android:textColor="@color/jelly_text_primary"/>
+            </LinearLayout>
+
+            <TextView android:id="@+id/tv_aim_body_part" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="当前瞄准部位：胸部" android:textSize="10sp" android:textColor="@color/jelly_text_accent" android:gravity="center" android:layout_marginBottom="8dp"/>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔮 提前预判瞄准量" android:textSize="11sp" android:textColor="@color/jelly_text_secondary" android:layout_marginBottom="4dp"/>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="4dp">
+                <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="预判量X：" android:textSize="11sp" android:textColor="@color/jelly_text_secondary"/>
+                <SeekBar android:id="@+id/seekbar_prediction_aim_x" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:max="500" android:progress="50"/>
+                <EditText android:id="@+id/et_prediction_aim_x" android:layout_width="60dp" android:layout_height="wrap_content" android:inputType="numberDecimal" android:text="50" android:textSize="11sp" android:padding="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginBottom="4dp">
+                <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="预判量Y：" android:textSize="11sp" android:textColor="@color/jelly_text_secondary"/>
+                <SeekBar android:id="@+id/seekbar_prediction_aim_y" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:max="500" android:progress="30"/>
+                <EditText android:id="@+id/et_prediction_aim_y" android:layout_width="60dp" android:layout_height="wrap_content" android:inputType="numberDecimal" android:text="30" android:textSize="11sp" android:padding="4dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
