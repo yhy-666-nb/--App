@@ -1,3 +1,3 @@
 #!/bin/bash
-cd "$(目录名" $0 ")"
-。/gradle/wrapper/gradle组装的无bug守护进程
+cd "$(dirname "$0")"
+exec ./gradle/wrapper/gradle "$@"
