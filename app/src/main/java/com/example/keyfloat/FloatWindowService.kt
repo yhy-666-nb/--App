@@ -48,7 +48,7 @@ class FloatWindowService : Service() {
         floatView = inflater.inflate(R.layout.float_window_main, null)
 
         val navContainer = floatView.findViewById<LinearLayout>(R.id.nav_container)
-        val tabIcons = listOf("🏠", "🎯", "✏️", "⚙️")
+        val tabIcons = listOf("✡️", "🔯", "☯️", "⚛️")
 
         for (i in tabs.indices) {
             val tab = TextView(this).apply {
@@ -71,7 +71,7 @@ class FloatWindowService : Service() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             else WindowManager.LayoutParams.TYPE_PHONE,
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+            WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
             PixelFormat.TRANSLUCENT
         )
         params.gravity = Gravity.TOP or Gravity.END
@@ -109,34 +109,36 @@ class FloatWindowService : Service() {
         return@setOnClickListener
     }
 
-    // 自动获取前台应用包名
-    val pkg = ProcessReader.getForegroundPackage(this@FloatWindowService)
-    if (pkg != null && pkg != packageName) {
-        ProcessReader.targetPackageName = pkg
+    // 获取最近使用的应用列表
+    val appList = ProcessReader.getRecentApps(this@FloatWindowService)
+    if (appList.isEmpty()) {
+        Toast.makeText(this@FloatWindowService, "没有找到最近使用的应用", Toast.LENGTH_LONG).show()
+        return@setOnClickListener
+    }
 
-        // 更新主页UI
-        val pm = packageManager
-        try {
-            val appInfo = pm.getApplicationInfo(pkg, 0)
-            val appName = pm.getApplicationLabel(appInfo).toString()
-            val appIcon = pm.getApplicationIcon(pkg)
+    // 构建应用名称数组
+    val appNames = appList.map { it.appName }.toTypedArray()
 
+    // 弹出选择对话框
+    android.app.AlertDialog.Builder(this@FloatWindowService)
+        .setTitle("选择要绑定的应用")
+        .setItems(appNames) { _, which ->
+            val selected = appList[which]
+            ProcessReader.targetPackageName = selected.packageName
+
+            // 更新主页UI
             val iconView = homeView.findViewById<ImageView>(R.id.iv_target_icon)
             val nameView = homeView.findViewById<TextView>(R.id.tv_target_name)
             val infoView = homeView.findViewById<TextView>(R.id.tv_process_info)
 
-            iconView.setImageDrawable(appIcon)
-            nameView.text = appName
+            iconView.setImageDrawable(selected.icon)
+            nameView.text = selected.appName
             infoView.text = "状态：已绑定"
 
-            Toast.makeText(this@FloatWindowService, "已绑定: $appName", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            homeView.findViewById<TextView>(R.id.tv_target_name).text = "绑定失败"
-            Toast.makeText(this@FloatWindowService, "绑定失败，请重试", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@FloatWindowService, "已绑定: ${selected.appName}", Toast.LENGTH_SHORT).show()
         }
-    } else {
-        Toast.makeText(this@FloatWindowService, "未检测到前台应用\n请先打开目标游戏再点击读取", Toast.LENGTH_LONG).show()
-    }
+        .setNegativeButton("取消", null)
+        .show()
                 }
             }
             1 -> {
