@@ -102,8 +102,41 @@ class FloatWindowService : Service() {
                 contentFrame.addView(homeView)
                 val btnReadProcess = homeView.findViewById<Button>(R.id.btn_read_process)
                 btnReadProcess.setOnClickListener {
-                    Toast.makeText(this, "请先开启使用情况访问权限", Toast.LENGTH_SHORT).show()
-                    requestUsageStatsPermission()
+    // 检查使用情况访问权限
+    if (!hasUsageStatsPermission()) {
+        requestUsageStatsPermission()
+        Toast.makeText(this@FloatWindowService, "请先开启使用情况访问权限", Toast.LENGTH_LONG).show()
+        return@setOnClickListener
+    }
+
+    // 自动获取前台应用包名
+    val pkg = ProcessReader.getForegroundPackage(this@FloatWindowService)
+    if (pkg != null && pkg != packageName) {
+        ProcessReader.targetPackageName = pkg
+
+        // 更新主页UI
+        val pm = packageManager
+        try {
+            val appInfo = pm.getApplicationInfo(pkg, 0)
+            val appName = pm.getApplicationLabel(appInfo).toString()
+            val appIcon = pm.getApplicationIcon(pkg)
+
+            val iconView = homeView.findViewById<ImageView>(R.id.iv_target_icon)
+            val nameView = homeView.findViewById<TextView>(R.id.tv_target_name)
+            val infoView = homeView.findViewById<TextView>(R.id.tv_process_info)
+
+            iconView.setImageDrawable(appIcon)
+            nameView.text = appName
+            infoView.text = "状态：已绑定"
+
+            Toast.makeText(this@FloatWindowService, "已绑定: $appName", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            homeView.findViewById<TextView>(R.id.tv_target_name).text = "绑定失败"
+            Toast.makeText(this@FloatWindowService, "绑定失败，请重试", Toast.LENGTH_SHORT).show()
+        }
+    } else {
+        Toast.makeText(this@FloatWindowService, "未检测到前台应用\n请先打开目标游戏再点击读取", Toast.LENGTH_LONG).show()
+    }
                 }
             }
             1 -> {
