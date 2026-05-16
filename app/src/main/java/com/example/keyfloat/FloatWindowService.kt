@@ -157,10 +157,26 @@ class FloatWindowService : Service() {
         }
     }
 
-    private fun requestUsageStatsPermission() {
-        val intent = Intent(android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+    private fun hasUsageStatsPermission(): Boolean {
+    val appOps = getSystemService(Context.APP_OPS_SERVICE) as? android.app.AppOpsManager
+    if (appOps != null) {
+        val mode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            appOps.unsafeCheckOpNoThrow(
+                android.app.AppOpsManager.OPSTR_GET_USAGE_STATS,
+                android.os.Process.myUid(),
+                packageName
+            )
+        } else {
+            @Suppress("DEPRECATION")
+            appOps.checkOpNoThrow(
+                android.app.AppOpsManager.OPSTR_GET_USAGE_STATS,
+                android.os.Process.myUid(),
+                packageName
+            )
+        }
+        return mode == android.app.AppOpsManager.MODE_ALLOWED
+    }
+    return false
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
