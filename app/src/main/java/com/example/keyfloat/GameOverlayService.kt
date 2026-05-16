@@ -3,7 +3,9 @@ package com.example.keyfloat
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.PixelFormat
+import android.graphics.PorterDuff
 import android.os.Build
 import android.os.IBinder
 import android.view.Gravity
@@ -21,18 +23,29 @@ class GameOverlayService : Service() {
 
     companion object {
         var isRunning = false
-        var showPlayerModel = false; var showHealthBar = false; var showBoxEsp = false
-        var showDistance = false; var showStamina = false; var showWeight = false
-        var showLoot = false; var showChests = false
-        var chestFilterCommon = true; var chestFilterRare = true
-        var chestFilterEpic = true; var chestFilterLegendary = true
-        var chestDisplayDistance = 1000; var lootPriceMin = 0; var lootPriceMax = 1000000
+        var showPlayerModel = false
+        var showHealthBar = false
+        var showBoxEsp = false
+        var showDistance = false
+        var showStamina = false
+        var showWeight = false
+        var showLoot = false
+        var showChests = false
+        var chestFilterCommon = true
+        var chestFilterRare = true
+        var chestFilterEpic = true
+        var chestFilterLegendary = true
+        var chestDisplayDistance = 1000
+        var lootPriceMin = 0
+        var lootPriceMax = 1000000
 
         fun start(context: Context) {
             if (!isRunning) {
                 val intent = Intent(context, GameOverlayService::class.java)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) context.startForegroundService(intent)
-                else context.startService(intent)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                    context.startForegroundService(intent)
+                else
+                    context.startService(intent)
             }
         }
 
@@ -55,7 +68,8 @@ class GameOverlayService : Service() {
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.MATCH_PARENT,
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             else WindowManager.LayoutParams.TYPE_PHONE,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or
@@ -73,7 +87,9 @@ class GameOverlayService : Service() {
             getSystemService(NotificationManager::class.java).createNotificationChannel(channel)
         }
         startForeground(2, NotificationCompat.Builder(this, channelId)
-            .setContentTitle("绘制服务运行中").setSmallIcon(android.R.drawable.ic_menu_view).build())
+            .setContentTitle("绘制服务运行中")
+            .setSmallIcon(android.R.drawable.ic_menu_view)
+            .build())
     }
 
     private fun startRenderLoop() {
