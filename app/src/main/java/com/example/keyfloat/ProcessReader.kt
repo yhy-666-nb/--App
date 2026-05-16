@@ -7,7 +7,7 @@ import android.os.Build
 
 object ProcessReader {
 
-    var targetPackageName: String = ""
+    var targetPackageName: String = "com.pi.czrxdfirst"
     var isProcessActive: Boolean = false
         private set
 
