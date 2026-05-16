@@ -1,4 +1,3 @@
-#!/bin/bash
-cd "$(dirname "$0")"
-chmod +x gradle/wrapper/gradle-wrapper.jar 2>/dev/null
-./gradle/wrapper/gradle assembleDebug --no-daemon 2>/dev/null
+@echo off
+设置目录名=%~dp0
+Java-xmx 2048m-jar " % DIRNAME % grad le/wrapper/grad le-wrapper。jar " % *
