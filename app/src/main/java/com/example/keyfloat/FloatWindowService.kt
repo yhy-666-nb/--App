@@ -102,7 +102,9 @@ class FloatWindowService : Service() {
                 contentFrame.addView(homeView)
                 val btnReadProcess = homeView.findViewById<Button>(R.id.btn_read_process)
                 btnReadProcess.setOnClickListener {
-    // 检查使用情况访问权限
+    Toast.makeText(this@FloatWindowService, "按钮被点击了", Toast.LENGTH_SHORT).show()
+                    
+                    // 检查使用情况访问权限
     if (!hasUsageStatsPermission()) {
         requestUsageStatsPermission()
         Toast.makeText(this@FloatWindowService, "请先开启使用情况访问权限", Toast.LENGTH_LONG).show()
